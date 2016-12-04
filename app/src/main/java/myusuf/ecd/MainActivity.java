@@ -13,7 +13,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    // url inputs to turn pins into outputs,0's and 1's
+    // TODO your_unique_id parts are to be filled later
     URL url1 = new URL("https://cloud.arest.io/your_unique_id/mode/1/o");
     URL url2 = new URL("https://cloud.arest.io/your_unique_id/mode/2/o");
     URL url3 = new URL("https://cloud.arest.io/your_unique_id/mode/3/o");
@@ -27,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     URL url11 = new URL("https://cloud.arest.io/your_unique_id/mode/4/0");
     URL url12 = new URL("https://cloud.arest.io/your_unique_id/mode/4/1");
 
-    public MainActivity() throws MalformedURLException {
-    }
 
+    // TL;DR
+    // Simply, we need to simulate a person typing these urls in a specific order into a web browser and hitting enter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +39,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Each pin is set to be an output pin
         HttpURLConnection httpCon1 = (HttpURLConnection) url1.openConnection();
         url1.setRequestMethod("POST");
         httpCon1.connect();
         HttpURLConnection httpCon2 = (HttpURLConnection) url2.openConnection();
         url2.setRequestMethod("POST");
-        httpCon1.connect();
+        httpCon2.connect();
         HttpURLConnection httpCon3 = (HttpURLConnection) url3.openConnection();
         url3.setRequestMethod("POST");
-        httpCon1.connect();
+        httpCon3.connect();
         HttpURLConnection httpCon4 = (HttpURLConnection) url4.openConnection();
         url4.setRequestMethod("POST");
-        httpCon1.connect();
+        httpCon4.connect();
 
+        // When each button is pressed, a specific combination of http requests are sent
         Button f4pos10 = (Button) findViewById(R.id.f4pos10);
         f4pos10.setOnClickListener(new View.OnClickListener() {
             @Override
