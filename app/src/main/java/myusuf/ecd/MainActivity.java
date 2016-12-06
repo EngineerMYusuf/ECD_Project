@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -24,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,21,31,40"));
 
             }
         });
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,21,30,41"));
 
             }
         });
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,21,30,40"));
 
             }
         });
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,20,31,41"));
 
             }
         });
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,20,31,40"));
 
             }
         });
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,20,30,41"));
 
             }
         });
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("11,20,30,40"));
 
             }
         });
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,21,31,41"));
 
             }
         });
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,21,31,40"));
 
             }
         });
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,21,30,41"));
 
             }
         });
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,21,30,40"));
 
             }
         });
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,31,41"));
 
             }
         });
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,31,40"));
 
             }
         });
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,30,41"));
 
             }
         });
@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,30,40"));
 
             }
         });
@@ -267,10 +267,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,31,40"));
+                System.out.println(SendCommandtoARest("10,21,30,41"));
+                System.out.println(SendCommandtoARest("11,20,30,41"));
+                System.out.println(SendCommandtoARest("11,21,31,40"));
             }
         });
 
@@ -280,10 +280,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,31,40"));
+                System.out.println(SendCommandtoARest("10,21,30,41"));
+                System.out.println(SendCommandtoARest("11,20,30,40"));
+                System.out.println(SendCommandtoARest("11,21,30,41"));
             }
         });
 
@@ -292,10 +292,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,30,41"));
+                System.out.println(SendCommandtoARest("10,21,31,41"));
+                System.out.println(SendCommandtoARest("11,20,31,41"));
+                System.out.println(SendCommandtoARest("11,21,30,41"));
             }
         });
         Button pop = (Button) findViewById(R.id.pop);
@@ -303,10 +303,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
-                System.out.println(SendCommandtoARest("11,21,31,41"));
+                System.out.println(SendCommandtoARest("10,20,30,41"));
+                System.out.println(SendCommandtoARest("10,21,31,40"));
+                System.out.println(SendCommandtoARest("11,20,31,40"));
+                System.out.println(SendCommandtoARest("11,21,30,41"));
             }
         });
 
