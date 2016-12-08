@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         return result;
 
     }
-
     // TL;DR
     // Simply, we need to simulate a person typing these urls in a specific order into a web browser and hitting enter
     @Override
