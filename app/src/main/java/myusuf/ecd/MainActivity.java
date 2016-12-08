@@ -1,5 +1,6 @@
 package myusuf.ecd;
 
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,10 +25,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class MainActivity extends AppCompatActivity {
 
-    String your_unique_id = "your_unique_id";
+    String your_unique_id = "21402399";
 
     public String SendCommandtoARest(String CmdString) {
         URL urlSend;
@@ -45,23 +45,45 @@ public class MainActivity extends AppCompatActivity {
 
             List<String> cmdList = Arrays.asList(CmdString.trim().split(","));
             for (String eachCmd : cmdList) {
-                urlSend = new URL("https://cloud.arest.io/" + your_unique_id + "/mode/" + eachCmd.substring(0, eachCmd.length() - 2) + "/" + eachCmd.substring(eachCmd.length() - 1));
-                httpPost = new HttpPost(String.valueOf(urlSend));
-                // Set some headers to inform server about the type of the content
-                httpPost.setHeader("Accept", "application/json");
-                httpPost.setHeader("Content-type", "application/json");
+                if (eachCmd.substring(eachCmd.length() - 1) == "o") {
+                    urlSend = new URL("https://cloud.arest.io/" + your_unique_id + "/mode/" + eachCmd.substring(0, eachCmd.length() - 2) + "/o");
+                    httpPost = new HttpPost(String.valueOf(urlSend));
+                    // Set some headers to inform server about the type of the content
+                    httpPost.setHeader("Accept", "application/json");
+                    httpPost.setHeader("Content-type", "application/json");
 
-                // Execute POST request to the given URL
-                httpResponse = httpclient.execute(httpPost);
+                    // Execute POST request to the given URL
+                    httpResponse = httpclient.execute(httpPost);
 
-                // receive response as inputStream
-                inputStream = httpResponse.getEntity().getContent();
+                    // receive response as inputStream
+                    inputStream = httpResponse.getEntity().getContent();
 
-                // convert inputstream to string
-                if (inputStream != null) {
-                    result += convertInputStreamToString(inputStream)+"\n";
-                } else {
-                    result += "Did not work at : "+eachCmd+"\n";
+                    // convert inputstream to string
+                    if (inputStream != null) {
+                        result += convertInputStreamToString(inputStream)+"\n";
+                    } else {
+                        result += "Did not work at : "+eachCmd+"\n";
+                    }
+                }
+                else {
+                    urlSend = new URL("https://cloud.arest.io/" + your_unique_id + "/digital/" + eachCmd.substring(0, eachCmd.length() - 2) + "/" + eachCmd.substring(eachCmd.length() - 1));
+                    httpPost = new HttpPost(String.valueOf(urlSend));
+                    // Set some headers to inform server about the type of the content
+                    httpPost.setHeader("Accept", "application/json");
+                    httpPost.setHeader("Content-type", "application/json");
+
+                    // Execute POST request to the given URL
+                    httpResponse = httpclient.execute(httpPost);
+
+                    // receive response as inputStream
+                    inputStream = httpResponse.getEntity().getContent();
+
+                    // convert inputstream to string
+                    if (inputStream != null) {
+                        result += convertInputStreamToString(inputStream) + "\n";
+                    } else {
+                        result += "Did not work at : " + eachCmd + "\n";
+                    }
                 }
 
             }
