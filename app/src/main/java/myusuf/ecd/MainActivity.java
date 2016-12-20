@@ -36,26 +36,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final MyTask f4pos10Task = new MyTask();
-        final MyTask f4pos5Task = new MyTask();
-        final MyTask f40Task = new MyTask();
-        final MyTask f4neg5Task= new MyTask();
-        final MyTask f3pos10Task= new MyTask();
-        final MyTask f3pos5Task= new MyTask();
-        final MyTask f30Task= new MyTask();
-        final MyTask f3neg5Task= new MyTask();
-        final MyTask f2pos10Task= new MyTask();
-        final MyTask f2pos5Task= new MyTask();
-        final MyTask f20Task= new MyTask();
-        final MyTask f2neg5Task= new MyTask();
-        final MyTask f1pos10Task= new MyTask();
-        final MyTask f1pos5Task= new MyTask();
-        final MyTask f10Task= new MyTask();
-        final MyTask f1neg5Task= new MyTask();
         final MyTask makeoutputs= new MyTask();
 
         // Each pin is set to be an output pin
-        makeoutputs.execute("1o,2o,3o,4o");
+        makeoutputs.execute("1o,2o,3o,4o,5o");
 
         // When each button is pressed, a specific combination of http requests are sent
         Button f4pos10 = (Button) findViewById(R.id.f4pos10);
@@ -63,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f4pos10Task = new MyTask();
-                System.out.println(f4pos10Task.execute("11,21,31,41"));
+                f4pos10Task.execute("50,11,21,31,41,51");
 
             }
         });
@@ -73,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f4pos5Task = new MyTask();
-                System.out.println(f4pos5Task.execute("11,21,31,40"));
+                f4pos5Task.execute("50,11,21,31,40,51");
 
             }
         });
@@ -83,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f40Task = new MyTask();
-                System.out.println(f40Task.execute("11,21,30,41"));
+                f40Task.execute("50,11,21,30,41,51");
 
             }
         });
@@ -93,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f4neg5Task = new MyTask();
-                System.out.println(f4neg5Task.execute("11,21,30,40"));
+                f4neg5Task.execute("50,11,21,30,40,51");
 
             }
         });
@@ -103,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f3pos10Task= new MyTask();
-                System.out.println(f3pos10Task.execute("11,20,31,41"));
+                f3pos10Task.execute("50,11,20,31,41,51");
 
             }
         });
@@ -113,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f3pos5Task = new MyTask();
-                System.out.println(f3pos5Task.execute("11,20,31,40"));
+                f3pos5Task.execute("50,11,20,31,40,51");
 
             }
         });
@@ -123,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f30Task = new MyTask();
-                System.out.println(f30Task.execute("11,20,30,41"));
+                f30Task.execute("50,11,20,30,41,51");
 
             }
         });
@@ -133,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f3neg5Task = new MyTask();
-                System.out.println(f3neg5Task.execute("11,20,30,40"));
+                f3neg5Task.execute("50,11,20,30,40,51");
 
             }
         });
@@ -143,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f2pos10Task = new MyTask();
-                System.out.println(f2pos10Task.execute("10,21,31,41"));
+                f2pos10Task.execute("50,10,21,31,41,51");
 
             }
         });
@@ -153,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f2pos5Task = new MyTask();
-                System.out.println(f2pos5Task.execute("10,21,31,40"));
+                f2pos5Task.execute("50,10,21,31,40,51");
 
             }
         });
@@ -163,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f20Task = new MyTask();
-                System.out.println(f20Task.execute("10,21,30,41"));
+                f20Task.execute("50,10,21,30,41,51");
 
             }
         });
@@ -173,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f2neg5Task = new MyTask();
-                System.out.println(f2neg5Task.execute("10,21,30,40"));
+                f2neg5Task.execute("50,10,21,30,40,51");
 
             }
         });
@@ -183,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f1pos10Task = new MyTask();
-                System.out.println(f1pos10Task.execute("10,20,31,41"));
+                f1pos10Task.execute("50,10,20,31,41,51");
 
             }
         });
@@ -193,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f1pos5Task = new MyTask();
-                System.out.println(f1pos5Task.execute("10,20,31,40"));
+                f1pos5Task.execute("50,10,20,31,40,51");
 
             }
         });
@@ -203,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f10Task = new MyTask();
-                System.out.println(f10Task.execute("10,20,30,41"));
+                f10Task.execute("50,10,20,30,41,51");
 
             }
         });
@@ -213,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyTask f1neg5Task = new MyTask();
-                System.out.println(f1neg5Task.execute("10,20,30,40"));
+                f1neg5Task.execute("50,10,20,30,40,51");
 
             }
         });
@@ -226,10 +210,10 @@ public class MainActivity extends AppCompatActivity {
                 MyTask f20Task = new MyTask();
                 MyTask f30Task = new MyTask();
                 MyTask f4pos5Task = new MyTask();
-                System.out.println(f1pos5Task.execute("10,20,31,40"));
-                System.out.println(f20Task.execute("10,21,30,41"));
-                System.out.println(f30Task.execute("11,20,30,41"));
-                System.out.println(f4pos5Task.execute("11,21,31,40"));
+                f1pos5Task.execute("50,10,20,31,40,51");
+                f20Task.execute("50,10,21,30,41,51");
+                f30Task.execute("50,11,20,30,41,51");
+                f4pos5Task.execute("50,11,21,31,40,51");
             }
         });
 
@@ -243,10 +227,10 @@ public class MainActivity extends AppCompatActivity {
                 MyTask f3neg5Task = new MyTask();
                 MyTask f40Task= new MyTask();
 
-                System.out.println(f1pos5Task.execute("10,20,31,40"));
-                System.out.println(f20Task.execute("10,21,30,41"));
-                System.out.println(f3neg5Task.execute("11,20,30,40"));
-                System.out.println(f40Task.execute("11,21,30,41"));
+                f1pos5Task.execute("50,10,20,31,40,51");
+                f20Task.execute("50,10,21,30,41,51");
+                f3neg5Task.execute("50,11,20,30,40,51");
+                f40Task.execute("50,11,21,30,41,51");
             }
         });
 
@@ -259,10 +243,10 @@ public class MainActivity extends AppCompatActivity {
                 MyTask f3pos10Task = new MyTask();
                 MyTask f40Task = new MyTask();
 
-                System.out.println(f10Task.execute("10,20,30,41"));
-                System.out.println(f2pos10Task.execute("10,21,31,41"));
-                System.out.println(f3pos10Task.execute("11,20,31,41"));
-                System.out.println(f40Task.execute("11,21,30,41"));
+                f10Task.execute("50,10,20,30,41,51");
+                f2pos10Task.execute("50,10,21,31,41,51");
+                f3pos10Task.execute("50,11,20,31,41,51");
+                f40Task.execute("50,11,21,30,41,51");
             }
         });
         Button pop = (Button) findViewById(R.id.pop);
@@ -274,10 +258,10 @@ public class MainActivity extends AppCompatActivity {
                 MyTask f3pos5Task = new MyTask();
                 MyTask f40Task = new MyTask();
 
-                f10Task.execute("10,20,30,41");
-                f2pos5Task.execute("10,21,31,40");
-                f3pos5Task.execute("11,20,31,40");
-                f40Task.execute("11,21,30,41");
+                f10Task.execute("50,10,20,30,41,51");
+                f2pos5Task.execute("50,10,21,31,40,51");
+                f3pos5Task.execute("50,11,20,31,40,51");
+                f40Task.execute("50,11,21,30,41,51");
             }
         });
 
@@ -306,12 +290,12 @@ public class MainActivity extends AppCompatActivity {
                 for (String eachCmd : cmdList) {
                     if (eachCmd.substring(eachCmd.length() - 1).equals("o")) {
                         urlSend = new URL("https://cloud.arest.io/" + "21402399" + "/mode/" + eachCmd.substring(0, eachCmd.length() - 1) + "/o");
-                        System.out.println(urlSend);
+                        //System.out.println(urlSend);
                     }
 
                     else{
                         urlSend = new URL("https://cloud.arest.io/" + "21402399" + "/digital/" + eachCmd.substring(0, eachCmd.length() - 1) + "/" + eachCmd.substring(eachCmd.length() - 1));
-                        System.out.println(urlSend);
+                        //System.out.println(urlSend);
                     }
 
                     httpPost = new HttpPost(String.valueOf(urlSend));
