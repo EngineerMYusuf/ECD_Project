@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public String readByte(){
         int done = 0;
         sendLine readTask = new sendLine();
-        String pinState;
+        AsyncTask<String, String, Integer> pinState;
         String firstBit;
         String secondBit;
         String message = "";
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         Toast toast;
         int duration = Toast.LENGTH_SHORT;
         while (done < 4) {
-            pinState = readTask.execute("r","9").toString();
-            while (pinState.equals("0")) {
-                pinState = readTask.execute("r", "9").toString();
+            pinState = readTask.execute("r","9");
+            while (pinState.equals(2)) {
+                pinState = readTask.execute("r", "9");
                 text = "waiting";
                 toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
             toast = Toast.makeText(context, text, duration);
             toast.show();
             readTask.execute("w","11");
-            while (pinState.equals("1")) {
-                pinState = readTask.execute("r", "9").toString();
+            while (pinState.equals(1)) {
+                pinState = readTask.execute("r", "9");
             }
             readTask.execute("w","10");
             done++;
@@ -137,20 +137,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void waitForAck(){
         sendLine ackTask = new sendLine();
-        // TODO Async<String,String,String> to String comparison may cause problems
-        String pinState = ackTask.execute("r","9").toString();
-        Context context = getApplicationContext();
-        CharSequence text;
-        Toast toast;
-        int duration = Toast.LENGTH_SHORT;
-        text = "going to while";
-        toast = Toast.makeText(context, text, duration);
-        toast.show();
-        while (pinState.equals("0")) {
-            pinState = ackTask.execute("r", "9").toString();
-            text = "waiting";
-            toast = Toast.makeText(context, text, duration);
-            toast.show();
+        // TODO Async<String,String,Integer> to Integer comparison may cause problems
+        AsyncTask<String, String, Integer> pinState = ackTask.execute("r","9");
+        while (pinState.equals(0)) {
+            pinState = ackTask.execute("r", "9");
         }
     }
     @Override
@@ -237,13 +227,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public static class sendLine extends AsyncTask<String,String,String> {
+    public static class sendLine extends AsyncTask<String,String,Integer> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Integer doInBackground(String... params) {
             return SendCommandtoARest(params[0]);
         }
-        String SendCommandtoARest(String CmdString) {
+        int SendCommandtoARest(String CmdString) {
             URL urlSend;
             InputStream inputStream;
             String result = "";
@@ -289,22 +279,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if(rw.equals("r")) {
                         JSONObject jObject = new JSONObject(result);
-                        String message = jObject.getString("message");
-                        return message.substring(message.length() - 1);
+                        int message = jObject.getInt("return_value");
+                        return message;
                     }
                 }
 
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
-                return "Error : " + ex.getLocalizedMessage();
+
             } catch (IOException ex) {
                 Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
-                return "Error : " + ex.getLocalizedMessage();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return result;
+            return 2;
         }
 
 
