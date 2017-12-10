@@ -1,6 +1,6 @@
 package myusuf.ecd;
 
-
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,245 +32,217 @@ import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TL;DR
-    // Simply, we need to simulate a person typing these urls in a specific order into a web browser and hitting enter
+    private static boolean read;
+    private static int bite4I = 0;
+    private static int bite3 = 0;
+    private static int bite2 = 0;
+    private static double bite4D;
+
+    public static boolean getRead()
+    {
+        return read;
+    }
+
+
+
+    public void sendByte(int integer){
+        sendLine sendTask = new sendLine();
+        String binaryString = Integer.toBinaryString(0x100 | integer).substring(1);
+        String firstQuarter = "10,7" + binaryString.charAt(0) + ",8" + binaryString.charAt(1) + ",11";
+        String secondQuarter = "10,7" + binaryString.charAt(2) + ",8" + binaryString.charAt(3) + ",11";
+        String thirdQuarter = "10,7" + binaryString.charAt(4) + ",8" + binaryString.charAt(5) + ",11";
+        String fourthQuarter = "10,7" + binaryString.charAt(6) + ",8" + binaryString.charAt(7) + ",11";
+        sendTask.execute("w", firstQuarter);
+        waitForAck();
+        sendTask.execute("w", secondQuarter);
+        waitForAck();
+        sendTask.execute("w", thirdQuarter);
+        waitForAck();
+        sendTask.execute("w", fourthQuarter);
+        waitForAck();
+    }
+
+    public String readByte(){
+        int done = 0;
+        sendLine readTask = new sendLine();
+        String pinState;
+        String firstBit;
+        String secondBit;
+        String message = "";
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+        while (done < 4) {
+            pinState = readTask.execute("r","9").toString();
+            while (pinState.equals("0")) {
+                pinState = readTask.execute("r", "9").toString();
+                text = "waiting";
+                toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            firstBit = readTask.execute("r","7").toString();
+            text = firstBit;
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+            secondBit = readTask.execute("r","8").toString();
+            text = secondBit;
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+            message += message + firstBit + secondBit;
+            text = message;
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+            readTask.execute("w","11");
+            while (pinState.equals("1")) {
+                pinState = readTask.execute("r", "9").toString();
+            }
+            readTask.execute("w","10");
+            done++;
+        }
+        return message;
+    }
+    class ReadThread extends Thread
+    {
+        public void run()
+        {
+            while(MainActivity.getRead())
+            {
+                //Byte 1 (hello)
+                int bite1 = Integer.parseInt(readByte(),2);
+                if(bite1 == 0){
+
+                    //Byte 2 (Source)
+                    bite2 = Integer.parseInt(readByte(),2);
+
+                    //Byte 3 (Type)
+                    bite3 = Integer.parseInt(readByte(),2);
+
+                    //Byte 4 (Data)
+                    bite4D = 0;
+                    bite4I = 0;
+                    if(bite3 == 1) {
+                        bite4D = (double) Integer.parseInt(readByte(), 2);
+                        bite4D = bite4D/10;
+                    }
+                    else{
+                        bite4I = Integer.parseInt(readByte(), 2);
+                        bite4I = bite4I/10;
+                    }
+                    if(bite2 == 1){
+
+                    }
+                }
+            }
+        }
+    }
+
+    public void waitForAck(){
+        sendLine ackTask = new sendLine();
+        // TODO Async<String,String,String> to String comparison may cause problems
+        String pinState = ackTask.execute("r","9").toString();
+        Context context = getApplicationContext();
+        CharSequence text;
+        Toast toast;
+        int duration = Toast.LENGTH_SHORT;
+        text = "going to while";
+        toast = Toast.makeText(context, text, duration);
+        toast.show();
+        while (pinState.equals("0")) {
+            pinState = ackTask.execute("r", "9").toString();
+            text = "waiting";
+            toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final MyTask makeoutputs= new MyTask();
+        TextView temp1 = (TextView) findViewById(R.id.setTemp1);
+        TextView temp2 = (TextView) findViewById(R.id.setTemp2);
+        TextView hum1 = (TextView) findViewById(R.id.setHum1);
+        TextView hum2 = (TextView) findViewById(R.id.setHum2);
+        temp1.setText("--°C");
+        temp2.setText("--°C");
+        hum1.setText("--%");
+        hum2.setText("--%");
 
-        // Each pin is set to be an output pin
-        makeoutputs.execute("1o,2o,3o,4o,5o");
-
-        // When each button is pressed, a specific combination of http requests are sent
-        Button f4pos10 = (Button) findViewById(R.id.f4pos10);
-        f4pos10.setOnClickListener(new View.OnClickListener() {
+        if(bite2 == 1){
+            String txt = Double.toString(bite4D) +"°C";
+            temp1.setText(txt);
+        }
+        else if(bite2 == 2){
+            String txt = Double.toString(bite4D) +"°C";
+            temp2.setText(txt);
+        }
+        else if(bite2 == 3){
+            String txt = Integer.toString(bite4I) +"%";
+            hum1.setText(txt);
+        }
+        else if(bite2 == 4){
+            String txt = Integer.toString(bite4I) +"%";
+            hum2.setText(txt);
+        }
+        Button setHum1 = (Button) findViewById(R.id.getHum1);
+        setHum1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyTask f4pos10Task = new MyTask();
-                f4pos10Task.execute("50,11,21,31,41,51");
+                read = false;
+                Thread t = new ReadThread();
+                // Send Source
+                sendByte(0);
+                // Send Destination
+                sendByte(15);
+                // Send Packet Number
+                sendByte(15);
+                // Send Data Type
+                sendByte(15);
+                // Send Data
+                sendByte(15);
+                sendByte(15);
+                // Send Check Sum
+                sendByte(15);
+                read = true;
+                t.start();
+            }
+        });
+
+        Button setHum2 = (Button) findViewById(R.id.getHum2);
+        setHum2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                read = false;
+                Thread t = new ReadThread();
+                // Send Source
+                sendByte(0);
+                // Send Destination
+                sendByte(15);
+                // Send Packet Number
+                sendByte(15);
+                // Send Data Type
+                sendByte(15);
+                // Send Data
+                sendByte(15);
+                sendByte(15);
+                // Send Check Sum
+                sendByte(15);
+                read = true;
+                t.start();
+
 
             }
         });
 
-        Button f4pos5 = (Button) findViewById(R.id.f4pos5);
-        f4pos5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f4pos5Task = new MyTask();
-                f4pos5Task.execute("50,11,21,31,40,51");
-
-            }
-        });
-
-        Button f40 = (Button) findViewById(R.id.f40);
-        f40.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f40Task = new MyTask();
-                f40Task.execute("50,11,21,30,41,51");
-
-            }
-        });
-
-        Button f4neg5 = (Button) findViewById(R.id.f4neg5);
-        f4neg5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f4neg5Task = new MyTask();
-                f4neg5Task.execute("50,11,21,30,40,51");
-
-            }
-        });
-
-        Button f3pos10 = (Button) findViewById(R.id.f3pos10);
-        f3pos10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f3pos10Task= new MyTask();
-                f3pos10Task.execute("50,11,20,31,41,51");
-
-            }
-        });
-
-        Button f3pos5 = (Button) findViewById(R.id.f3pos5);
-        f3pos5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f3pos5Task = new MyTask();
-                f3pos5Task.execute("50,11,20,31,40,51");
-
-            }
-        });
-
-        Button f30 = (Button) findViewById(R.id.f30);
-        f30.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f30Task = new MyTask();
-                f30Task.execute("50,11,20,30,41,51");
-
-            }
-        });
-
-        Button f3neg5 = (Button) findViewById(R.id.f3neg5);
-        f3neg5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f3neg5Task = new MyTask();
-                f3neg5Task.execute("50,11,20,30,40,51");
-
-            }
-        });
-
-        Button f2pos10 = (Button) findViewById(R.id.f2pos10);
-        f2pos10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f2pos10Task = new MyTask();
-                f2pos10Task.execute("50,10,21,31,41,51");
-
-            }
-        });
-
-        Button f2pos5 = (Button) findViewById(R.id.f2pos5);
-        f2pos5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f2pos5Task = new MyTask();
-                f2pos5Task.execute("50,10,21,31,40,51");
-
-            }
-        });
-
-        Button f20 = (Button) findViewById(R.id.f20);
-        f20.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f20Task = new MyTask();
-                f20Task.execute("50,10,21,30,41,51");
-
-            }
-        });
-
-        Button f2neg5 = (Button) findViewById(R.id.f2neg5);
-        f2neg5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f2neg5Task = new MyTask();
-                f2neg5Task.execute("50,10,21,30,40,51");
-
-            }
-        });
-
-        Button f1pos10 = (Button) findViewById(R.id.f1pos10);
-        f1pos10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f1pos10Task = new MyTask();
-                f1pos10Task.execute("50,10,20,31,41,51");
-
-            }
-        });
-
-        Button f1pos5 = (Button) findViewById(R.id.f1pos5);
-        f1pos5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f1pos5Task = new MyTask();
-                f1pos5Task.execute("50,10,20,31,40,51");
-
-            }
-        });
-
-        Button f10 = (Button) findViewById(R.id.f10);
-        f10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f10Task = new MyTask();
-                f10Task.execute("50,10,20,30,41,51");
-
-            }
-        });
-
-        Button f1neg5 = (Button) findViewById(R.id.f1neg5);
-        f1neg5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f1neg5Task = new MyTask();
-                f1neg5Task.execute("50,10,20,30,40,51");
-
-            }
-        });
-
-        Button rock = (Button) findViewById(R.id.rock);
-        rock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f1pos5Task = new MyTask();
-                MyTask f20Task = new MyTask();
-                MyTask f30Task = new MyTask();
-                MyTask f4pos5Task = new MyTask();
-                f1pos5Task.execute("50,10,20,31,40,51");
-                f20Task.execute("50,10,21,30,41,51");
-                f30Task.execute("50,11,20,30,41,51");
-                f4pos5Task.execute("50,11,21,31,40,51");
-            }
-        });
-
-
-        Button jazz = (Button) findViewById(R.id.jazz);
-        jazz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f1pos5Task = new MyTask();
-                MyTask f20Task = new MyTask();
-                MyTask f3neg5Task = new MyTask();
-                MyTask f40Task= new MyTask();
-
-                f1pos5Task.execute("50,10,20,31,40,51");
-                f20Task.execute("50,10,21,30,41,51");
-                f3neg5Task.execute("50,11,20,30,40,51");
-                f40Task.execute("50,11,21,30,41,51");
-            }
-        });
-
-        Button metal = (Button) findViewById(R.id.metal);
-        metal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f10Task = new MyTask();
-                MyTask f2pos10Task = new MyTask();
-                MyTask f3pos10Task = new MyTask();
-                MyTask f40Task = new MyTask();
-
-                f10Task.execute("50,10,20,30,41,51");
-                f2pos10Task.execute("50,10,21,31,41,51");
-                f3pos10Task.execute("50,11,20,31,41,51");
-                f40Task.execute("50,11,21,30,41,51");
-            }
-        });
-        Button pop = (Button) findViewById(R.id.pop);
-        pop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask f10Task = new MyTask();
-                MyTask f2pos5Task = new MyTask();
-                MyTask f3pos5Task = new MyTask();
-                MyTask f40Task = new MyTask();
-
-                f10Task.execute("50,10,20,30,41,51");
-                f2pos5Task.execute("50,10,21,31,40,51");
-                f3pos5Task.execute("50,11,20,31,40,51");
-                f40Task.execute("50,11,21,30,41,51");
-            }
-        });
 
     }
-    public class MyTask extends AsyncTask<String,String,String> {
+
+
+
+    public static class sendLine extends AsyncTask<String,String,String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -287,17 +263,20 @@ public class MainActivity extends AppCompatActivity {
                 HttpResponse httpResponse;
 
                 List<String> cmdList = Arrays.asList(CmdString.trim().split(","));
+                String rw = cmdList.get(0);
+                cmdList.remove(0);
+                label:
                 for (String eachCmd : cmdList) {
-                    if (eachCmd.substring(eachCmd.length() - 1).equals("o")) {
-                        urlSend = new URL("https://cloud.arest.io/" + "21402399" + "/mode/" + eachCmd.substring(0, eachCmd.length() - 1) + "/o");
-                        //System.out.println(urlSend);
+                    switch (rw) {
+                        case "w":
+                            urlSend = new URL("192.168.137.5/" + "/digital/" + eachCmd.substring(0, eachCmd.length() - 1) + "/" + eachCmd.substring(eachCmd.length() - 1));
+                            break;
+                        case "r":
+                            urlSend = new URL("192.168.137.5/" + "/digital/" + eachCmd);
+                            break;
+                        default:
+                            break label;
                     }
-
-                    else{
-                        urlSend = new URL("https://cloud.arest.io/" + "21402399" + "/digital/" + eachCmd.substring(0, eachCmd.length() - 1) + "/" + eachCmd.substring(eachCmd.length() - 1));
-                        //System.out.println(urlSend);
-                    }
-
                     httpPost = new HttpPost(String.valueOf(urlSend));
                     // Set some headers to inform server about the type of the content
                     httpPost.setHeader("Accept", "application/json");
@@ -313,7 +292,13 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         result += "Did not work at : " + eachCmd + "\n";
                     }
+                    if(rw.equals("r")) {
+                        JSONObject jObject = new JSONObject(result);
+                        String message = jObject.getString("message");
+                        return message.substring(message.length() - 1);
+                    }
                 }
+
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
@@ -321,6 +306,8 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException ex) {
                 Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, ex);
                 return "Error : " + ex.getLocalizedMessage();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
             return result;
         }
@@ -328,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
 
         public String convertInputStreamToString(InputStream inputStream) throws IOException {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line = "";
+            String line;
             String result = "";
             while ((line = bufferedReader.readLine()) != null) {
                 result += line;
@@ -339,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 
 
 
@@ -364,3 +352,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
