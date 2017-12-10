@@ -128,9 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         bite4I = Integer.parseInt(readByte(), 2);
                         bite4I = bite4I/10;
-                    }
-                    if(bite2 == 1){
-
+                    
                     }
                 }
             }
