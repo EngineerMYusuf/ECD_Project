@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         bite4I = Integer.parseInt(readByte(), 2);
                         bite4I = bite4I/10;
-                    
+
                     }
                 }
             }
@@ -190,18 +190,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 read = false;
                 Thread t = new ReadThread();
-                // Send Source
-                sendByte(0);
+                // Send Start Byte
+                sendByte(255);
                 // Send Destination
-                sendByte(15);
-                // Send Packet Number
-                sendByte(15);
+                // 3rd Node
+                sendByte(3);
                 // Send Data Type
-                sendByte(15);
+                // Command
+                sendByte(2);
                 // Send Data
-                sendByte(15);
-                sendByte(15);
-                // Send Check Sum
+                // Water
                 sendByte(15);
                 read = true;
                 t.start();
@@ -215,18 +213,16 @@ public class MainActivity extends AppCompatActivity {
 
                 read = false;
                 Thread t = new ReadThread();
-                // Send Source
-                sendByte(0);
+                // Send Start Byte
+                sendByte(255);
                 // Send Destination
-                sendByte(15);
-                // Send Packet Number
-                sendByte(15);
+                // 4th Node
+                sendByte(4);
                 // Send Data Type
-                sendByte(15);
+                // Command
+                sendByte(2);
                 // Send Data
-                sendByte(15);
-                sendByte(15);
-                // Send Check Sum
+                // Water
                 sendByte(15);
                 read = true;
                 t.start();
