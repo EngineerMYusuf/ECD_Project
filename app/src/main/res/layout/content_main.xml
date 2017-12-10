@@ -14,280 +14,137 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
-        android:text="Equalizer"
+        android:text="GreenHouse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
-        android:textSize="70sp"
+        android:gravity="center"
+        android:textSize="60sp"
         android:textColor="@android:color/holo_blue_light"
+        android:layout_marginTop="51dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
-
-    <Button
-        android:text="-5 dB"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:id="@+id/setTemp1"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/f4neg5"
-        android:textAllCaps="false"
-        android:layout_alignTop="@+id/f40"
+        android:gravity="end"
+        android:ems="10"
+        android:layout_above="@+id/setTemp2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="68dp" />
-
-    <Button
-        android:text="0 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f30"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f40"
-        android:layout_alignBottom="@+id/f40"
-        android:layout_alignLeft="@+id/f3pos5"
-        android:layout_alignStart="@+id/f3pos5" />
-
-    <Button
-        android:text="-5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f3neg5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f4neg5"
-        android:layout_alignBottom="@+id/f4neg5"
-        android:layout_alignLeft="@+id/f30"
-        android:layout_alignStart="@+id/f30" />
-
-
-    <Button
-        android:text="Rock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/pop"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/rock" />
-
-    <Button
-        android:text="Jazz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/rock"
-        android:layout_alignLeft="@+id/f3neg5"
-        android:layout_alignStart="@+id/f3neg5"
-        android:id="@+id/jazz" />
-
-    <Button
-        android:text="-5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f2neg5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f3neg5"
-        android:layout_alignBottom="@+id/f3neg5"
-        android:layout_alignLeft="@+id/f20"
-        android:layout_alignStart="@+id/f20" />
-
-    <Button
-        android:text="+5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f2pos5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f3pos5"
-        android:layout_alignBottom="@+id/f3pos5"
-        android:layout_alignLeft="@+id/f2pos10"
-        android:layout_alignStart="@+id/f2pos10" />
-
-    <Button
-        android:text="0 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f20"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f30"
-        android:layout_alignBottom="@+id/f30"
-        android:layout_alignLeft="@+id/f2pos5"
-        android:layout_alignStart="@+id/f2pos5" />
+        android:layout_marginBottom="53dp" />
 
     <TextView
-        android:text="Profiles"
-        android:textColor="@android:color/holo_blue_light"
+        android:id="@+id/setTemp2"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:gravity="end"
+        android:ems="10"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/getHum1"
+        android:layout_toEndOf="@+id/getHum1" />
+    <TextView
+        android:id="@+id/textTemp1"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:ems="10"
+        android:text="Temperature of Room 1"
+        android:layout_alignBaseline="@+id/setTemp1"
+        android:layout_alignBottom="@+id/setTemp1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textTemp2"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:ems="10"
+        android:text="Temperature of Room 2"
+        android:layout_alignBaseline="@+id/setTemp2"
+        android:layout_alignBottom="@+id/setTemp2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/textHum2"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:ems="10"
+        android:text="Humidity of Plant 2"
+        android:layout_alignBaseline="@+id/setHum2"
+        android:layout_alignBottom="@+id/setHum2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textHum1"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:ems="10"
+        android:text="Humidity of Plant 1"
+        android:layout_alignBaseline="@+id/setHum1"
+        android:layout_alignBottom="@+id/setHum1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/setHum1"
         android:textSize="40sp"
-        android:layout_below="@+id/f3neg5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp" />
-
-    <Button
-        android:text="0 dB"
+        android:textColor="@android:color/holo_blue_bright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/f40"
-        android:textAllCaps="false"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/f3pos5"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="+5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f1pos5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f2pos5"
-        android:layout_alignBottom="@+id/f2pos5"
-        android:layout_alignRight="@+id/f1pos10"
-        android:layout_alignEnd="@+id/f1pos10" />
-
-    <Button
-        android:text="0 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f10"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f20"
-        android:layout_alignBottom="@+id/f20"
-        android:layout_alignRight="@+id/f1pos5"
-        android:layout_alignEnd="@+id/f1pos5" />
-
-    <Button
-        android:text="-5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f1neg5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f2neg5"
-        android:layout_alignBottom="@+id/f2neg5"
-        android:layout_alignRight="@+id/f10"
-        android:layout_alignEnd="@+id/f10" />
+        android:gravity="end"
+        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/setTemp2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="200 Hz"
-        android:layout_width="wrap_content"
+        android:id="@+id/setHum2"
+        android:textSize="40sp"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/firstF"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
-
-    <Button
-        android:text="+10 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f1pos10"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f2pos10"
-        android:layout_alignBottom="@+id/f2pos10"
+        android:gravity="end"
+        android:ems="10"
+        android:layout_above="@+id/getHum2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Pop"
+        android:text="Water Plant 1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pop"
-        android:layout_alignBaseline="@+id/metal"
-        android:layout_alignBottom="@+id/metal"
-        android:layout_toRightOf="@+id/f1neg5"
-        android:layout_toEndOf="@+id/f1neg5" />
-
-    <TextView
-        android:text="3.5 kHz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/thirdF"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
-
-    <Button
-        android:text="+5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f4pos5"
-        android:textAllCaps="false"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/f4pos10"
-        android:layout_alignLeft="@+id/f40"
-        android:layout_alignStart="@+id/f40" />
-
-    <Button
-        android:text="+5 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f3pos5"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f4pos5"
-        android:layout_alignBottom="@+id/f4pos5"
-        android:layout_alignLeft="@+id/f3pos10"
-        android:layout_alignStart="@+id/f3pos10" />
-
-    <TextView
-        android:text="12 kHz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fourthF"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f4pos10"
-        android:text="+10 dB"
-        android:textAllCaps="false"
-        android:layout_below="@+id/fourthF"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="+10 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f2pos10"
-        android:textAllCaps="false"
-        android:layout_below="@+id/secondF"
-        android:layout_alignRight="@+id/pop"
-        android:layout_alignEnd="@+id/pop"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <Button
-        android:text="+10 dB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/f3pos10"
-        android:textAllCaps="false"
-        android:layout_alignBaseline="@+id/f4pos10"
-        android:layout_alignBottom="@+id/f4pos10"
-        android:layout_toLeftOf="@+id/fourthF"
-        android:layout_toStartOf="@+id/fourthF"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
-
-    <TextView
-        android:text="565 Hz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/secondF"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp" />
-
-    <Button
-        android:text="Metal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/metal"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/textView"
+        android:id="@+id/getHum1"
+        android:layout_below="@+id/setHum1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <Button
+        android:text="Water Plant 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/getHum2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/getHum1"
+        android:layout_alignStart="@+id/getHum1"
+        android:layout_marginBottom="29dp" />
 
 </RelativeLayout>
