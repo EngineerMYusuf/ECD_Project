@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         Toast toast;
         int duration = Toast.LENGTH_SHORT;
         while (done < 4) {
-            pinState = readTask.execute("r","9");
+            pinState = readTask.execute("r","2");
             while (pinState.equals(2)) {
-                pinState = readTask.execute("r", "9");
+                pinState = readTask.execute("r", "2");
                 text = "waiting";
                 toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             readTask.execute("w","11");
             while (pinState.equals(1)) {
-                pinState = readTask.execute("r", "9");
+                pinState = readTask.execute("r", "2");
             }
             readTask.execute("w","10");
             done++;
@@ -138,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
     public void waitForAck(){
         sendLine ackTask = new sendLine();
         // TODO Async<String,String,Integer> to Integer comparison may cause problems
-        AsyncTask<String, String, Integer> pinState = ackTask.execute("r","9");
+        AsyncTask<String, String, Integer> pinState = ackTask.execute("r","2");
         while (pinState.equals(0)) {
-            pinState = ackTask.execute("r", "9");
+            pinState = ackTask.execute("r", "2");
         }
     }
     @Override
@@ -196,7 +196,9 @@ public class MainActivity extends AppCompatActivity {
                 t.start();
             }
         });
-
+        Thread t = new ReadThread();
+        read = true;
+        t.start();
         Button setHum2 = (Button) findViewById(R.id.getHum2);
         setHum2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,8 +219,6 @@ public class MainActivity extends AppCompatActivity {
                 sendByte(15);
                 read = true;
                 t.start();
-
-
             }
         });
 
