@@ -188,8 +188,9 @@ public class MainActivity extends AppCompatActivity {
         setHum1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                read = false;
                 Thread t = new ReadThread();
+                read = false;
+
                 // Send Start Byte
                 sendByte(255);
                 // Send Destination
@@ -210,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
         setHum2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                read = false;
                 Thread t = new ReadThread();
+                read = false;
+
                 // Send Start Byte
                 sendByte(255);
                 // Send Destination
